@@ -1,0 +1,52 @@
+{
+  "methods": [
+    {
+      "id": 1,
+      "method": "method1",
+      "params": [
+        {
+          "id": 1,
+          "param": "param1"
+        },
+        {
+          "id": 2,
+          "param": "param2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "method": "method2",
+      "params": [
+        {
+          "id": 1,
+          "param": "param21"
+        },
+        {
+          "id": 2,
+          "param": "param22"
+        },
+        {
+          "id": 3,
+          "param": "param23"
+        }
+      ]
+    }
+  ],
+  "datamarts": [
+    {
+      "id": 1,
+      "datamart": "datamart1"
+    },
+    {
+      "id": 2,
+      "datamart": "datamart2"
+    },
+    {
+      "sql": {
+        "sql": "datamart2.method2('3123','123213','412213123213')"
+      },
+      "id": 3
+    }
+  ]
+}
