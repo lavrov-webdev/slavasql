@@ -2,11 +2,11 @@ import useAxios from "axios-hooks";
 import {TDatamarts, TMethod} from "./types";
 
 export const useGetMethods = () => useAxios<TMethod[]>({
-  url: 'methods'
+  url: 'getMethods'
 })
 
 export const useGetDatamarts = () => useAxios<TDatamarts[]>({
-  url: "datamarts"
+  url: "getDatamarts"
 })
 
 export const usePostSQL = () => useAxios({
