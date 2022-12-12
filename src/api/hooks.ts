@@ -14,5 +14,6 @@ export const usePostSQL = () => useAxios({
     'Accept-Version': '1',
     'Content-Type': 'application/json'
   },
-  method: "POST"
+  method: "POST",
+  withCredentials: false
 }, {manual: true})
