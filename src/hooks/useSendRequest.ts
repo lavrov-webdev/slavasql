@@ -32,15 +32,20 @@ export const useSendRequest: TUseSendRequest = (setLoading) => {
             "Accept-Version": "1",
             "Content-Type": "application/json",
           },
-          body: { 
+          body: {
             sql: { sql: sqlString },
-          }
+          },
         },
       });
-      setResultState({ data: JSON.stringify(res.data), error: undefined });
-      setLoading(false);
+      if (res.data.error) {
+        setResultState({ data: undefined, error: JSON.stringify(res.data) });
+        setLoading(false);
+      } else {
+        setResultState({ data: JSON.stringify(res.data), error: undefined });
+        setLoading(false);
+      }
     } catch (e: any) {
-      setResultState({ data: undefined, error: JSON.stringify( e.message ) });
+      setResultState({ data: undefined, error: JSON.stringify(e.message) });
       setLoading(false);
     }
   };
