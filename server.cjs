@@ -9,11 +9,11 @@ app.use(express.static(__dirname + '/dist'));
 const apiProxy = proxy.createProxyMiddleware('/api', {
 	target: process.env.BASE_URL,
 	changeOrigin: true,
-	pathRewrite: { '^/api': '' }
+	pathRewrite: { '^/api': '' },
 })
 app.use('/api', apiProxy)
 
-app.get('*', (req, res) => {
+app.get('*', (_, res) => {
 	res.sendFile(path.join(__dirname, '/dist/index.html'));
 })
 

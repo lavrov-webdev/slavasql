@@ -10,10 +10,7 @@ export const useGetDatamarts = () => useAxios<TDatamarts[]>({
 })
 
 export const usePostSQL = () => useAxios({
-  headers: {
-    'Accept-Version': '1',
-    'Content-Type': 'application/json'
-  },
+  url: 'dummy',
   method: "POST",
-  withCredentials: false
+  withCredentials: false,
 }, {manual: true})
