@@ -17,7 +17,7 @@ const Result: FC = () => {
     ) : (
       <Alert sx={{width: '100%'}} severity="error">
         <AlertTitle>Ошибка</AlertTitle>
-        {res.error}
+        {JSON.stringify(JSON.parse(res.error!), null, 1)}
       </Alert>
     )}
   </div>

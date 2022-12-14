@@ -40,7 +40,7 @@ export const useSendRequest: TUseSendRequest = (setLoading) => {
       setResultState({ data: JSON.stringify(res.data), error: undefined });
       setLoading(false);
     } catch (e: any) {
-      setResultState({ data: undefined, error: e.message });
+      setResultState({ data: undefined, error: JSON.stringify( e.message ) });
       setLoading(false);
     }
   };
