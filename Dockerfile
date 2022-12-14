@@ -2,9 +2,13 @@ FROM node:16-alpine
 
 WORKDIR /app 
 
-COPY . /app 
+COPY package.json .
 
-RUN yarn install && yarn build && yarn cache clean
+RUN yarn install
+
+COPY . /app
+
+RUN yarn build && yarn cache clean
 
 EXPOSE 3000
 
