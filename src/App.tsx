@@ -1,11 +1,11 @@
-import {useEffect} from "react";
-import {useGetDatamarts, useGetMethods} from "./api/hooks";
-import {useSetRecoilState} from "recoil";
-import {datamartsAtom, methodsAtom, selectedDatamartAtom, selectedMethodAtom} from "./store/atoms";
+import { useEffect } from "react";
+import { useGetDatamarts, useGetMethods } from "./api/hooks";
+import { useSetRecoilState } from "recoil";
+import { datamartsAtom, methodsAtom } from "./store/atoms";
 import SelectMethod from "./SelectMethod";
 import MethodParams from "./MethodParams";
 import SelectDatamart from "./SelectDatamart";
-import {DotLoader} from "react-spinners";
+import { DotLoader } from "react-spinners";
 import styled from "@emotion/styled";
 import SendBuildedButton from "./SendBuildedButton";
 import IpInput from "./IpInput";
@@ -24,7 +24,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,68 +33,61 @@ const Content = styled.div`
   justify-content: center;
   max-width: 500px;
   width: 100%;
-`
+`;
 
 const AddressInputs = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 function App() {
-
-  const [{data: methodsData, loading: methodsLoading, error: methodsError}] = useGetMethods()
-  const [{data: datamartsData, loading: datamartsLoading, error: datamartsError}] = useGetDatamarts()
-  const setMethods = useSetRecoilState(methodsAtom)
-  const setSelectedMethod = useSetRecoilState(selectedMethodAtom)
-  const setDatamarts = useSetRecoilState(datamartsAtom)
-  const setSelectedDatamart = useSetRecoilState(selectedDatamartAtom)
+  const [{ data: methodsData, loading: methodsLoading }] = useGetMethods();
+  const [{ data: datamartsData, loading: datamartsLoading }] =
+    useGetDatamarts();
+  const setMethods = useSetRecoilState(methodsAtom);
+  const setDatamarts = useSetRecoilState(datamartsAtom);
 
   useEffect(() => {
     if (!methodsData) {
-      setMethods([])
+      setMethods([]);
     } else {
-      setMethods(methodsData)
-      setSelectedMethod({
-        id: methodsData[0].id,
-        name: methodsData[0].method
-      })
+      setMethods(methodsData);
     }
-  }, [methodsData])
+  }, [methodsData]);
 
   useEffect(() => {
     if (!datamartsData) {
-      setDatamarts([])
+      setDatamarts([]);
     } else {
-      setDatamarts(datamartsData)
-      setSelectedDatamart(datamartsData[0].datamart)
+      setDatamarts(datamartsData);
     }
-  }, [datamartsData])
+  }, [datamartsData]);
 
-  return <Container>
-    {
-      datamartsLoading || methodsLoading ? (
-        <DotLoader color={"rgb(25, 118, 210)"}/>
+  return (
+    <Container>
+      {datamartsLoading || methodsLoading ? (
+        <DotLoader color={"rgb(25, 118, 210)"} />
       ) : (
         <>
           <Content>
             <AddressInputs>
-              <IpInput/>
-              <PortInput/>
+              <IpInput />
+              <PortInput />
             </AddressInputs>
-            <SelectDatamart/>
-            <SelectMethod/>
-            <MethodParams/>
-            <SendBuildedButton/>
-            <SQLInput/>
-            <SendCustomButton/>
+            <SelectDatamart />
+            <SelectMethod />
+            <MethodParams />
+            <SendBuildedButton />
+            <SQLInput />
+            <SendCustomButton />
           </Content>
-          <Result/>
+          <Result />
         </>
-      )
-    }
-  </Container>
+      )}
+    </Container>
+  );
 }
 
-export default App
+export default App;

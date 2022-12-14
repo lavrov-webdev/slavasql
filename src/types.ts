@@ -7,8 +7,8 @@ export type TMethodField = {
   name: string,
   id: number
 }
-export type TRequiredStringField = {
-  value: string,
+export type TField<T> = {
+  value: T,
   error?: string
 }
 

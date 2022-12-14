@@ -1,31 +1,37 @@
-import {FC} from "react";
-import {useRecoilState, useRecoilValue} from "recoil";
-import {datamartsAtom, selectedDatamartAtom} from "./store/atoms";
-import {Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import { FC, useMemo } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { datamartsAtom, selectedDatamartAtom } from "./store/atoms";
+import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
 
 const SelectDatamart: FC = () => {
-  const [selectedDatamart, setSelectedDatamart] = useRecoilState(selectedDatamartAtom);
-  const datamarts = useRecoilValue(datamartsAtom)
+  const [selectedDatamart, setSelectedDatamart] =
+    useRecoilState(selectedDatamartAtom);
+  const datamarts = useRecoilValue(datamartsAtom);
 
-  const onSelect = (event: SelectChangeEvent) => {
-    setSelectedDatamart(event.target.value)
-  }
+  const options = useMemo(() => {
+    return datamarts.map((d) => d.datamart);
+  }, [datamarts]);
 
-  if (!selectedDatamart || datamarts.length === 0) return null
+  const onSelect = (_: any, val: string | null) => {
+    setSelectedDatamart({ error: undefined, value: val });
+  };
 
-  return <Box sx={{width: '100%'}}>
-    <FormControl fullWidth>
-      <InputLabel id="select-datamart">Выбери витрину</InputLabel>
-      <Select
-        labelId="select-datamart"
-        value={selectedDatamart}
-        label="Выбери витрину"
-        onChange={onSelect}
-      >
-        {datamarts.map(d => <MenuItem key={d.id + d.datamart} value={d.datamart}>{d.datamart}</MenuItem>)}
-      </Select>
-    </FormControl>
-  </Box>
+  if (datamarts.length === 0) return null;
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <FormControl fullWidth>
+        <Autocomplete
+          value={selectedDatamart.value || null}
+          onChange={onSelect}
+          options={options}
+          renderInput={(params) => (
+            <TextField {...params} error={!!selectedDatamart.error} label="Выбери витрину" />
+          )}
+        />
+      </FormControl>
+    </Box>
+  );
 };
 
-export default SelectDatamart
+export default SelectDatamart;

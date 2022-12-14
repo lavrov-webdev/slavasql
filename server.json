@@ -1,5 +1,5 @@
 {
-  "methods": [
+  "getMethods": [
     {
       "id": 1,
       "method": "method1",
@@ -33,7 +33,7 @@
       ]
     }
   ],
-  "datamarts": [
+  "getDatamarts": [
     {
       "id": 1,
       "datamart": "datamart1"
@@ -41,12 +41,6 @@
     {
       "id": 2,
       "datamart": "datamart2"
-    },
-    {
-      "sql": {
-        "sql": "datamart2.method2('3123','123213','412213123213')"
-      },
-      "id": 3
     }
   ]
 }

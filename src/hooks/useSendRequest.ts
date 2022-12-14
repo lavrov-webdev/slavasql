@@ -1,6 +1,7 @@
 import { usePostSQL } from "../api/hooks";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { ipInputAtom, portInputAtom, resAtom } from "../store/atoms";
+import { useValidateAddressInputs } from "./useValidateAddressInputs";
 
 type TUseSendRequest = (
   setLoading: (value: boolean) => void
@@ -9,19 +10,12 @@ type TUseSendRequest = (
 export const useSendRequest: TUseSendRequest = (setLoading) => {
   const [_, sendRequest] = usePostSQL();
   const setResultState = useSetRecoilState(resAtom);
-  const [portState, setPortState] = useRecoilState(portInputAtom);
-  const [ipState, setIpState] = useRecoilState(ipInputAtom);
+  const portState = useRecoilValue(portInputAtom);
+  const ipState = useRecoilValue(ipInputAtom);
+  const validateAddress = useValidateAddressInputs()
 
   return async (sqlString: string) => {
-    let error = false;
-    if (!portState.value) {
-      setPortState((p) => ({ ...p, error: "Введи порт" }));
-      error = true;
-    }
-    if (!ipState.value) {
-      setIpState((p) => ({ ...p, error: "Введи IP" }));
-      error = true;
-    }
+    let error = validateAddress()
     if (error) return;
     try {
       setLoading(true);
