@@ -1,46 +1,33 @@
 {
-  "getMethods": [
-    {
-      "id": 1,
-      "method": "method1",
-      "params": [
-        {
-          "id": 1,
-          "param": "param1"
-        },
-        {
-          "id": 2,
-          "param": "param2"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "method": "method2",
-      "params": [
-        {
-          "id": 1,
-          "param": "param21"
-        },
-        {
-          "id": 2,
-          "param": "param22"
-        },
-        {
-          "id": 3,
-          "param": "param23"
-        }
-      ]
-    }
-  ],
   "getDatamarts": [
     {
       "id": 1,
-      "datamart": "datamart1"
+      "datamart": "huntingticket_70",
+      "methods": [
+        {
+          "id": 1,
+          "datamart_id": 1,
+          "method": "huntingticket_svedeniya",
+          "params": [
+            { "id": 1, "method_id": "1", "param": "name" },
+            { "id": 2, "method_id": "1", "param": "surname" },
+            { "id": 3, "method_id": "1", "param": "passport series" },
+            { "id": 4, "method_id": "1", "param": "passport number" }
+          ]
+        },
+        {
+          "id": 2,
+          "datamart_id": 1,
+          "method": "huntingticket_svedeniya_ser_num",
+          "params": [
+            { "id": 5, "method_id": "2", "param": "name" },
+            { "id": 6, "method_id": "2", "param": "surname" },
+            { "id": 7, "method_id": "2", "param": "passport series" },
+            { "id": 8, "method_id": "2", "param": "passport number" }
+          ]
+        }
+      ]
     },
-    {
-      "id": 2,
-      "datamart": "datamart2"
-    }
+    { "id": 2, "datamart": "to_71", "methods": [] }
   ]
 }

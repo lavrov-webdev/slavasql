@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useGetDatamarts, useGetMethods } from "./api/hooks";
+import { useGetDatamarts } from "./api/hooks";
 import { useSetRecoilState } from "recoil";
-import { datamartsAtom, methodsAtom } from "./store/atoms";
+import { datamartsAtom } from "./store/atoms";
 import SelectMethod from "./SelectMethod";
 import MethodParams from "./MethodParams";
 import SelectDatamart from "./SelectDatamart";
@@ -43,19 +43,9 @@ const AddressInputs = styled.div`
 `;
 
 function App() {
-  const [{ data: methodsData, loading: methodsLoading }] = useGetMethods();
   const [{ data: datamartsData, loading: datamartsLoading }] =
     useGetDatamarts();
-  const setMethods = useSetRecoilState(methodsAtom);
   const setDatamarts = useSetRecoilState(datamartsAtom);
-
-  useEffect(() => {
-    if (!methodsData) {
-      setMethods([]);
-    } else {
-      setMethods(methodsData);
-    }
-  }, [methodsData]);
 
   useEffect(() => {
     if (!datamartsData) {
@@ -67,7 +57,7 @@ function App() {
 
   return (
     <Container>
-      {datamartsLoading || methodsLoading ? (
+      {datamartsLoading ? (
         <DotLoader color={"rgb(25, 118, 210)"} />
       ) : (
         <>

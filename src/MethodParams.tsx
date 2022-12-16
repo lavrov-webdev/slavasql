@@ -1,7 +1,6 @@
 import {FC, useEffect} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {methodParamsFieldsAtom, selectedMethodParamsSelector} from "./store/atoms";
-import {TMethodParamField} from "./types";
 import {Box, TextField} from "@mui/material";
 
 const MethodParams: FC = () => {
@@ -10,7 +9,7 @@ const MethodParams: FC = () => {
 
   const changeHandler = (id: number, value: string) => {
     setFields(prev => {
-      const clone: TMethodParamField[] = structuredClone(prev)
+      const clone = structuredClone(prev)
       clone.find(p => p.id === id)!.value = value
       return clone
     })
