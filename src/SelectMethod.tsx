@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {selectedDatamartMethods, selectedMethodAtom } from "./store/atoms";
 import { Autocomplete, Box, FormControl, TextField } from "@mui/material";
@@ -9,6 +9,10 @@ const SelectMethod: FC = () => {
   const methods = useRecoilValue(selectedDatamartMethods);
 
   const options = useMemo(() => methods.map((m) => m.method), [methods]);
+
+  useEffect(() => {
+    setSelectedMethod({error: undefined, value: null})
+  }, [methods])
 
   const onSelect = (_: any, val: string | null) => {
     const methodToSelect = methods.find((m) => m.method === val);
